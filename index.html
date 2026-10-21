@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="fr"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mission commerciale interactive – 1re MCVB</title>
+<style>
+:root{--navy:#17324d;--blue:#246b8e;--coral:#e56b5d;--cream:#f5f2eb;--green:#247a55;--red:#b43d3d;--ink:#24313d}
+*{box-sizing:border-box} body{margin:0;background:var(--cream);font-family:Arial,Helvetica,sans-serif;color:var(--ink);line-height:1.5}
+header{background:var(--navy);color:white;padding:26px 20px}
+.wrap{max-width:1000px;margin:auto;padding:20px}
+.kicker{text-transform:uppercase;letter-spacing:2px;font-size:.8rem;color:#ffd4cc;font-weight:bold}
+h1{margin:5px 0 8px;font-size:clamp(1.7rem,4vw,2.5rem)} header p{max-width:760px;margin:0;color:#e7edf2}
+.meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}.pill{border:1px solid #ffffff70;border-radius:20px;padding:5px 11px;font-size:.85rem}
+.progressbox{background:white;padding:14px 18px;border-radius:14px;box-shadow:0 3px 12px #10203010;margin:18px 0}
+.progressline{height:10px;background:#e6e9eb;border-radius:9px;overflow:hidden;margin-top:8px}.bar{height:100%;width:0;background:var(--coral);transition:width .25s}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0}.tab{border:0;border-radius:10px;padding:10px 14px;background:#dce4e8;color:var(--navy);font-weight:bold;cursor:pointer}.tab.active{background:var(--blue);color:white}
+.card{background:white;border-radius:16px;padding:22px;margin:14px 0;box-shadow:0 4px 14px #1020300d}.missionhead{display:flex;align-items:flex-start;gap:14px}.number{background:#ffe1db;color:#9c3d32;border-radius:12px;padding:10px 13px;font-weight:bold;font-size:1.2rem}.tag{font-size:.78rem;color:var(--blue);font-weight:bold;text-transform:uppercase;letter-spacing:1px}
+h2{margin:3px 0 8px;color:var(--navy)} h3{color:var(--navy);margin-bottom:6px}
+.scenario{background:#edf4f7;border-left:4px solid var(--blue);padding:13px 16px;border-radius:8px;margin:16px 0}
+table{border-collapse:collapse;width:100%;margin:12px 0}th,td{border:1px solid #d6dde1;padding:10px;text-align:left}th{background:#eaf0f3;color:var(--navy)}
+.question{padding:14px 0;border-top:1px solid #e5e8ea}.question:first-of-type{border-top:0}
+label{display:block;font-weight:bold;margin-bottom:7px}.answerrow{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+input[type=number],input[type=text]{width:min(260px,100%);padding:11px;border:1px solid #aebbc3;border-radius:8px;font-size:1rem}
+button{cursor:pointer;border:0;border-radius:9px;padding:11px 15px;font-weight:bold;font-size:.95rem}.primary{background:var(--coral);color:white}.secondary{background:#e8edf0;color:var(--navy)}.check{background:var(--green);color:white}
+.feedback{font-weight:bold;margin-top:8px;min-height:24px}.good{color:var(--green)}.bad{color:var(--red)}
+.hint{display:none;background:#fff6df;padding:10px 13px;border-radius:8px;margin-top:9px}.solution{display:none;background:#edf7ef;padding:12px 14px;border-radius:8px;margin-top:10px}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.hidden{display:none}.scorebig{font-size:2rem;font-weight:bold;color:var(--blue)}
+footer{text-align:center;color:#59656e;font-size:.85rem;padding:24px}
+@media(max-width:600px){.wrap{padding:12px}.card{padding:16px}th,td{padding:7px;font-size:.9rem}}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+<div class="kicker">Co-intervention · Mathématiques &amp; commerce</div>
+<h1>Mission prospection : objectif clients !</h1>
+<p>Tu es commercial(e) dans l’entreprise fictive <strong>Nova Mobilier Pro</strong>. Ton responsable te confie une campagne de prospection. À toi d’analyser les chiffres, de calculer et de choisir la meilleure action commerciale.</p>
+<div class="meta"><span class="pill">Classe : 1re MCVB</span><span class="pill">Durée indicative : 45–60 min</span><span class="pill">Calculatrice autorisée</span></div>
+</div></header>
+<main class="wrap">
+<div class="progressbox">
+<strong>Ta progression</strong> <span id="progressText">0 mission validée sur 4</span>
+<div class="progressline"><div class="bar" id="bar"></div></div>
+<div style="margin-top:8px">Points obtenus : <strong id="score">0</strong> / 12</div>
+</div>
+<div class="scenario"><strong>Consigne générale :</strong> lis chaque situation, saisis tes réponses puis clique sur « Vérifier ». Tu peux demander un indice et afficher la correction après avoir essayé.</div>
+<nav class="tabs" aria-label="Missions">
+<button class="tab active" data-target="m1">Mission 1</button><button class="tab" data-target="m2">Mission 2</button><button class="tab" data-target="m3">Mission 3</button><button class="tab" data-target="m4">Mission 4</button>
+</nav>
+
+<section class="card mission" id="m1">
+<div class="missionhead"><div class="number">01</div><div><div class="tag">Niveau 1 · Pourcentages</div><h2>Préparer une offre de prospection</h2></div></div>
+<p>Nova Mobilier Pro propose des chaises de bureau aux petites entreprises. Pour attirer de nouveaux clients, l’entreprise offre une remise de lancement.</p>
+<table><tbody><tr><th>Produit</th><th>Prix initial HT</th><th>Remise</th></tr><tr><td>Chaise ergonomique</td><td>180 €</td><td>15 %</td></tr></tbody></table>
+<div class="question">
+<label for="q1">1. Quel est le montant de la remise en euros ?</label>
+<div class="answerrow"><input id="q1" type="number" step=".01" placeholder="Montant en €"><button class="secondary" onclick="hint('h1')">Afficher un indice</button></div>
+<div class="hint" id="h1">Calcule 15 % de 180 € : multiplie 180 par 0,15.</div>
+<div class="feedback" id="f1"></div>
+</div>
+<div class="question">
+<label for="q2">2. Quel est le prix de vente HT après remise ?</label>
+<div class="answerrow"><input id="q2" type="number" step=".01" placeholder="Prix après remise en €"><button class="secondary" onclick="hint('h2')">Afficher un indice</button></div>
+<div class="hint" id="h2">Soustrais le montant de la remise au prix initial.</div>
+<div class="feedback" id="f2"></div>
+</div>
+<div class="actions"><button class="check" onclick="checkMission(1)">Vérifier mes réponses</button><button class="secondary" onclick="solution(1)">Voir la correction</button></div>
+<div class="solution" id="s1"><strong>Correction :</strong> remise = 180 × 0,15 = <strong>27 €</strong>. Prix après remise = 180 − 27 = <strong>153 € HT</strong>.</div>
+</section>
+
+<section class="card mission hidden" id="m2">
+<div class="missionhead"><div class="number">02</div><div><div class="tag">Niveau 1–2 · Taux de transformation</div><h2>Mesurer l’efficacité de la prospection</h2></div></div>
+<p>La semaine dernière, l’équipe a contacté des entreprises pour présenter l’offre.</p>
+<table><tbody><tr><th>Indicateur</th><th>Résultat</th></tr><tr><td>Entreprises contactées</td><td>120</td></tr><tr><td>Rendez-vous obtenus</td><td>18</td></tr></tbody></table>
+<div class="question">
+<label for="q3">1. Quel est le taux de transformation des contacts en rendez-vous ? (en %)</label>
+<div class="answerrow"><input id="q3" type="number" step=".01" placeholder="Taux en %"><button class="secondary" onclick="hint('h3')">Afficher un indice</button></div>
+<div class="hint" id="h3">Taux = (nombre de rendez-vous ÷ nombre de contacts) × 100.</div>
+<div class="feedback" id="f3"></div>
+</div>
+<div class="question">
+<label for="q4">2. Si l’équipe contacte 200 entreprises avec le même taux, combien de rendez-vous peut-elle espérer obtenir ?</label>
+<div class="answerrow"><input id="q4" type="number" step="1" placeholder="Nombre de rendez-vous"><button class="secondary" onclick="hint('h4')">Afficher un indice</button></div>
+<div class="hint" id="h4">Applique le taux trouvé à 200 contacts. Un nombre de personnes se donne généralement en nombre entier.</div>
+<div class="feedback" id="f4"></div>
+</div>
+<div class="actions"><button class="check" onclick="checkMission(2)">Vérifier mes réponses</button><button class="secondary" onclick="solution(2)">Voir la correction</button></div>
+<div class="solution" id="s2"><strong>Correction :</strong> (18 ÷ 120) × 100 = <strong>15 %</strong>. Pour 200 contacts : 200 × 0,15 = <strong>30 rendez-vous</strong>.</div>
+</section>
+
+<section class="card mission hidden" id="m3">
+<div class="missionhead"><div class="number">03</div><div><div class="tag">Niveau 2 · Chiffre d’affaires</div><h2>Estimer les ventes possibles</h2></div></div>
+<p>À la suite des rendez-vous, l’entreprise prévoit de vendre des chaises à une partie des prospects. Pour cette estimation, utilise les données ci-dessous.</p>
+<table><tbody><tr><th>Donnée</th><th>Valeur</th></tr><tr><td>Rendez-vous réalisés</td><td>30</td></tr><tr><td>Clients qui achètent</td><td>40 % des rendez-vous</td></tr><tr><td>Nombre moyen de chaises par client</td><td>3</td></tr><tr><td>Prix unitaire après remise HT</td><td>153 €</td></tr></tbody></table>
+<div class="question">
+<label for="q5">1. Combien de clients devraient acheter ?</label>
+<div class="answerrow"><input id="q5" type="number" step="1" placeholder="Nombre de clients"><button class="secondary" onclick="hint('h5')">Afficher un indice</button></div>
+<div class="hint" id="h5">Calcule 40 % de 30 rendez-vous.</div>
+<div class="feedback" id="f5"></div>
+</div>
+<div class="question">
+<label for="q6">2. Combien de chaises seront vendues au total ?</label>
+<div class="answerrow"><input id="q6" type="number" step="1" placeholder="Nombre de chaises"><button class="secondary" onclick="hint('h6')">Afficher un indice</button></div>
+<div class="hint" id="h6">Multiplie le nombre de clients acheteurs par 3 chaises.</div>
+<div class="feedback" id="f6"></div>
+</div>
+<div class="question">
+<label for="q7">3. Quel chiffre d’affaires HT prévisionnel cela représente-t-il ?</label>
+<div class="answerrow"><input id="q7" type="number" step=".01" placeholder="Chiffre d’affaires en €"><button class="secondary" onclick="hint('h7')">Afficher un indice</button></div>
+<div class="hint" id="h7">Chiffre d’affaires = quantité vendue × prix unitaire HT.</div>
+<div class="feedback" id="f7"></div>
+</div>
+<div class="actions"><button class="check" onclick="checkMission(3)">Vérifier mes réponses</button><button class="secondary" onclick="solution(3)">Voir la correction</button></div>
+<div class="solution" id="s3"><strong>Correction :</strong> 30 × 0,40 = <strong>12 clients</strong>. 12 × 3 = <strong>36 chaises</strong>. 36 × 153 € = <strong>5 508 € HT</strong>.</div>
+</section>
+
+<section class="card mission hidden" id="m4">
+<div class="missionhead"><div class="number">04</div><div><div class="tag">Niveau 3 · Rentabilité et décision</div><h2>La campagne est-elle intéressante ?</h2></div></div>
+<p>Le responsable veut savoir si la campagne de prospection mérite d’être reconduite. Voici les résultats estimés.</p>
+<table><tbody><tr><th>Élément</th><th>Montant</th></tr><tr><td>Chiffre d’affaires HT prévisionnel</td><td>5 508 €</td></tr><tr><td>Coût d’achat total des 36 chaises</td><td>3 240 €</td></tr><tr><td>Coût de la campagne de prospection</td><td>450 €</td></tr></tbody></table>
+<div class="question">
+<label for="q8">1. Calcule la marge commerciale totale (CA HT − coût d’achat).</label>
+<div class="answerrow"><input id="q8" type="number" step=".01" placeholder="Marge en €"><button class="secondary" onclick="hint('h8')">Afficher un indice</button></div>
+<div class="hint" id="h8">Soustrais 3 240 € à 5 508 €.</div>
+<div class="feedback" id="f8"></div>
+</div>
+<div class="question">
+<label for="q9">2. Après déduction du coût de prospection, quel montant reste-t-il ?</label>
+<div class="answerrow"><input id="q9" type="number" step=".01" placeholder="Résultat après campagne en €"><button class="secondary" onclick="hint('h9')">Afficher un indice</button></div>
+<div class="hint" id="h9">Soustrais les 450 € de campagne à la marge commerciale.</div>
+<div class="feedback" id="f9"></div>
+</div>
+<div class="question">
+<label for="q10">3. La campagne semble-t-elle intéressante selon ces données ? Justifie en une phrase.</label>
+<input id="q10" type="text" placeholder="Écris ta conclusion professionnelle" style="width:100%;max-width:650px">
+<div class="feedback" id="f10"></div>
+</div>
+<div class="actions"><button class="check" onclick="checkMission(4)">Vérifier mes réponses</button><button class="secondary" onclick="solution(4)">Voir la correction</button></div>
+<div class="solution" id="s4"><strong>Correction :</strong> marge commerciale = 5 508 − 3 240 = <strong>2 268 €</strong>. Après campagne : 2 268 − 450 = <strong>1 818 €</strong>. Conclusion possible : « La campagne semble intéressante car la marge commerciale couvre son coût et laisse 1 818 € avant les autres charges éventuelles. »</div>
+</section>
+
+<section class="card">
+<h2>📌 Bilan professionnel</h2>
+<p>Complète oralement ou par écrit cette phrase :</p>
+<p><em>« Pour évaluer une campagne de prospection, je dois suivre __________, calculer __________ et vérifier si __________. »</em></p>
+<button class="primary" onclick="showSummary()">Afficher une proposition de bilan</button>
+<div class="solution" id="summary"><strong>Proposition :</strong> « Pour évaluer une campagne de prospection, je dois suivre le nombre de contacts et de rendez-vous, calculer le taux de transformation et la marge générée, puis vérifier si les résultats couvrent les coûts de la campagne. »</div>
+<div class="actions"><button class="secondary" onclick="window.print()">Imprimer / enregistrer en PDF</button><button class="secondary" onclick="resetAll()">Recommencer l’activité</button></div>
+<div id="finalScore" style="margin-top:16px"></div>
+</section>
+</main>
+<footer>Activité pédagogique fictive · Mathématiques appliquées à la prospection commerciale · 1re MCVB</footer>
+<script>
+const answers={1:[{id:'q1',val:27,tol:.1,fb:'f1',label:'La remise est de 27 €.'},{id:'q2',val:153,tol:.1,fb:'f2',label:'Le prix après remise est de 153 € HT.'}],2:[{id:'q3',val:15,tol:.1,fb:'f3',label:'Le taux de transformation est de 15 %.'},{id:'q4',val:30,tol:.1,fb:'f4',label:'On peut espérer 30 rendez-vous.'}],3:[{id:'q5',val:12,tol:.1,fb:'f5',label:'12 clients devraient acheter.'},{id:'q6',val:36,tol:.1,fb:'f6',label:'36 chaises seront vendues.'},{id:'q7',val:5508,tol:1,fb:'f7',label:'Le chiffre d’affaires prévisionnel est de 5 508 € HT.'}],4:[{id:'q8',val:2268,tol:1,fb:'f8',label:'La marge commerciale est de 2 268 €.'},{id:'q9',val:1818,tol:1,fb:'f9',label:'Il reste 1 818 € après le coût de campagne.'}]};
+let done={},points=0;
+document.querySelectorAll('.tab').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));b.classList.add('active');document.querySelectorAll('.mission').forEach(x=>x.classList.add('hidden'));document.getElementById(b.dataset.target).classList.remove('hidden');}));
+function hint(id){let el=document.getElementById(id);el.style.display=el.style.display==='block'?'none':'block'}
+function solution(n){let el=document.getElementById('s'+n);el.style.display=el.style.display==='block'?'none':'block'}
+function showSummary(){let el=document.getElementById('summary');el.style.display=el.style.display==='block'?'none':'block'}
+function checkMission(n){
+ let list=answers[n],correct=0;
+ list.forEach(a=>{let v=parseFloat(document.getElementById(a.id).value),f=document.getElementById(a.fb);if(Number.isFinite(v)&&Math.abs(v-a.val)<=a.tol){f.className='feedback good';f.textContent='✓ Correct. '+a.label;correct++}else{f.className='feedback bad';f.textContent='À revoir. Recalcule puis réessaie.'}});
+ if(n===4){let t=document.getElementById('q10').value.trim(),f=document.getElementById('f10');if(t.length>12 && /campagne|coût|cout|marge|intéress|interess|1818|1 818/i.test(t)){f.className='feedback good';f.textContent='✓ Ta justification contient un argument pertinent.';correct++}else{f.className='feedback';f.textContent='Pense à comparer la marge au coût de la campagne et à justifier ta décision.'}}
+ let max=n===3?3:(n===4?3:2);
+ let awarded=Math.round(correct/max*(n===1?3:n===2?3:n===3?3:3));
+ if(!done[n]||awarded>done[n]){points+=awarded-(done[n]||0);done[n]=awarded}
+ update();
+}
+function update(){let count=Object.keys(done).length;document.getElementById('progressText').textContent=count+' mission'+(count>1?'s':'')+' validée'+(count>1?'s':'')+' sur 4';document.getElementById('bar').style.width=(count/4*100)+'%';document.getElementById('score').textContent=points;document.getElementById('finalScore').innerHTML=count===4?'<div class="scorebig">'+points+' / 12 points</div><strong>Activité terminée !</strong> Relis les corrections et prépare une conclusion commerciale.':''}
+function resetAll(){if(!confirm('Recommencer et effacer les réponses ?'))return;document.querySelectorAll('input').forEach(i=>i.value='');document.querySelectorAll('.feedback').forEach(f=>{f.textContent='';f.className='feedback'});document.querySelectorAll('.hint,.solution').forEach(x=>x.style.display='none');done={};points=0;update();document.querySelectorAll('.mission').forEach(x=>x.classList.add('hidden'));document.getElementById('m1').classList.remove('hidden');document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));document.querySelector('[data-target="m1"]').classList.add('active')}
+</script>
+
+</body></html>
